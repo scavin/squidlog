@@ -11,17 +11,7 @@ Installation
 ### Clone Git repo
 
 ```bash
-git clone git://github.com/jiehanzheng/squid2radius.git
-```
-
-### Install dependencies
-
-```bash
-# install pip for python2, command varies if you are on a different OS
-sudo pacman -S python2-pip
-
-# install pyrad, command varies if you are on a different OS
-sudo pip2 install pyrad
+git clone git://github.com/billzhong/squid2radius.git
 ```
 
 Usage
@@ -37,7 +27,7 @@ usage: squid2radius.py [-h] [-p RADIUS_ACCT_PORT]
 For instance, run like this if you have access log file at `/var/log/squid/access.log`, RADIUS server running at `localhost` with secret set to `testing123`:
 
 ```bash
-sudo python2 squid2radius.py /var/log/squid/access.log localhost testing123
+sudo python squid2radius.py /var/log/squid/access.log localhost testing123
 ```
 
 It is certainly a good idea to make a cron job for this.
