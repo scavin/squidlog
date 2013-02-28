@@ -1,5 +1,9 @@
 *.py[cod]
 
+# for mac and win
+.DS_Store
+Thumbs.db
+
 # C extensions
 *.so
 
