@@ -60,7 +60,7 @@ python squidlocal.py /var/log/squid/access.log
 
 ### --exclude-pattern
 
-If for some reason you need to prevent usage information of certain user from being sent to the RADIUS server, there is an argument for that!  Use `--exclude-pattern="(girl|boy)friend"` and squidlocal.py won't send usage of either your `girlfriend` or `boyfriend` to the RADIUS server.
+If for some reason you need to prevent usage information displayed, there is an argument for that!  Use `--exclude-pattern="(girl|boy)friend"` and squidlocal.py won't display usage of either your `girlfriend` or `boyfriend`.
 
 Note
 ----
