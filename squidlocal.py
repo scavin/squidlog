@@ -45,13 +45,19 @@ def format(size):
         fmt = str(size / 1024 /1024 / 1024 / 1024 / 1024) + 'PB'
     return fmt
 
+skipped = []
+
 for username, total_bytes in sum_bytes.iteritems():
     if args.exclude_pattern and exclude_pattern.search(username):
+        skipped.append(username)
         sys.stdout.flush()
         continue
     else:
         sys.stdout.write(username + ' ' + '<' + format(total_bytes) + '>')
         sys.stdout.write("\n")
         sys.stdout.flush()
+
+if len(skipped) != 0:
+    print "Skipped username:",skipped
 
 sys.stdout.write("Done.\n")
