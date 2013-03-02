@@ -2,6 +2,7 @@
 
 import sys
 import argparse
+import re
 
 parser = argparse.ArgumentParser(description='Analyze squid log by user and display usage.')
 parser.add_argument('logfile_path', help='logfile to analyze')
