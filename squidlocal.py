@@ -12,6 +12,10 @@ args = parser.parse_args()
 logfile = open(args.logfile_path)
 print logfile
 
+if args.exclude_pattern:
+    print "Exclusion check has been enabled."
+    exclude_pattern = re.compile(args.exclude_pattern)
+
 sys.stdout.write("Analyzing...\n")
 
 sum_bytes = {}
@@ -26,10 +30,6 @@ for i, line in enumerate(logfile):
     except KeyError:
         sum_bytes[rfc931] = int(num_bytes)
 
-if args.exclude_pattern:
-    print "Exclusion check has been enabled."
-    exclude_pattern = re.compile(args.exclude_pattern)
-
 def format(size):
     if size < 1024:
         fmt = str(size) + 'B'
@@ -43,17 +43,15 @@ def format(size):
         fmt = str(size / 1024 /1024 / 1024 / 1024) + 'GB'
     else:
         fmt = str(size / 1024 /1024 / 1024 / 1024 / 1024) + 'PB'
-
     return fmt
 
 for username, total_bytes in sum_bytes.iteritems():
-    sys.stdout.write(username + ' ' + '<' + format(total_bytes) + '>')
-    sys.stdout.write("\n")
-    sys.stdout.flush()
-  
     if args.exclude_pattern and exclude_pattern.search(username):
-        sys.stdout.write("..skipped!\n")
         sys.stdout.flush()
         continue
+    else:
+        sys.stdout.write(username + ' ' + '<' + format(total_bytes) + '>')
+        sys.stdout.write("\n")
+        sys.stdout.flush()
 
 sys.stdout.write("Done.\n")
