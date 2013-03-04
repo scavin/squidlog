@@ -21,10 +21,12 @@ sys.stdout.write("Analyzing...\n")
 sum_bytes = {}
 for i, line in enumerate(logfile):
 
-    _, _, _, _, num_bytes, _, _, rfc931, _, _ = line.split()[:10]
+    _, _, _, code_status, num_bytes, _, _, rfc931, _, _ = line.split()[:10]
   
     if rfc931 == '-': continue
-  
+
+    if code_status.split('/')[1] == '407': continue
+
     try:
         sum_bytes[rfc931] = sum_bytes[rfc931] + int(num_bytes)
     except KeyError:
