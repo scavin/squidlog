@@ -36,13 +36,19 @@ for i, line in enumerate(logfile):
   if i % 10000 == 0: sys.stdout.write('.'); sys.stdout.flush()
   
   # http://wiki.squid-cache.org/Features/LogFormat
-  _, _, _, code_status, num_bytes, _, _, rfc931, _, _ = line.split()[:10]
-  
+  try:
+    _, _, _, code_status, num_bytes, _, _, rfc931, _, _ = line.split()[:10]
+  except ValueError:
+    continue
+
   # unauthorized user
   if rfc931 == '-': continue
 
   # wrong username and/or password
-  if code_status.split('/')[1] == '407': continue
+  try:
+    if code_status.split('/')[1] == '407': continue
+  except IndexError:
+    continue
   
   try:
     sum_bytes[rfc931] = sum_bytes[rfc931] + int(num_bytes)
