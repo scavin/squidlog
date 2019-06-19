@@ -28,7 +28,7 @@ args = parser.parse_args()
 
 
 logfile = open(args.logfile_path)
-print logfile
+print(logfile)
 
 sys.stdout.write("Analyzing.")
 sum_bytes = {}
@@ -56,16 +56,16 @@ for i, line in enumerate(logfile):
     sum_bytes[rfc931] = int(num_bytes)
 
 
-print "\nSending..."
+print ("\nSending...")
 srv = Client(server=args.radius_server, secret=args.radius_secret,
              dict=Dictionary(sys.path[0] + "/dictionary"))
 
 if args.exclude_pattern:
-  print "Exclusion check has been enabled."
+  print ("Exclusion check has been enabled.")
   exclude_pattern = re.compile(args.exclude_pattern)
 
 failed_usernames = []
-for username, total_bytes in sum_bytes.iteritems():
+for username, total_bytes in sum_bytes.items():
   sys.stdout.write(username + ' ' + str(total_bytes))
   sys.stdout.write('.')
   sys.stdout.flush()
@@ -113,7 +113,7 @@ for username, total_bytes in sum_bytes.iteritems():
 
 
 if not args.no_rotation:
-  print "\nRotating squid log..."
+  print ("\nRotating squid log...")
   call([args.squid_path, "-k", "rotate"])
 
 
